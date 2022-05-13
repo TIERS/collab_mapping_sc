@@ -1,0 +1,31 @@
+name: AgentSwarm
+description: A smart contract to keep maps on-ledger
+structs: {}
+typedefs:
+  OccupancyGrid: Int32[]
+state:
+  submittedMaps: OccupancyGrid[]
+  submittedAgent: AgentID[]
+  controller: ChainID
+  missionID: Int32
+  possition: Position
+funcs:
+  init:
+    params:
+      controller: ChainID
+  uploadMap:
+    params:
+      map: OccupancyGrid
+      agent: AgentID
+  requestMission:
+    params:
+      agent: AgentID
+  register:
+    params:
+      agent: AgentID
+  submitLastMap: {}
+views:
+  getMission:
+    results:
+      missionID: Int32
+      possition: Position

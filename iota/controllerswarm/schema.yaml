@@ -1,0 +1,51 @@
+name: ControllerSwarm
+description: This smart contract is responsible to merge maps
+structs:
+  MapByzIndex:
+    conflict: Int32
+    nonConflict: Int32
+typedefs:
+  OccupancyGrid: Int32[]
+state:
+  submittedMaps: OccupancyGrid[]
+  subMapByzIndices: MapByzIndex[]
+  subMapAgent: AgentID[]
+  agents: map[AgentID]Int32
+  missions: Int32
+  width: Int32
+  length: Int32
+  windowSize: Int32
+  noiseThreshold: Int32
+funcs:
+  init:
+    params:
+      width: Int32
+      length: Int32
+      windowSize: Int32
+      noiseThreshold: Int32
+  register:
+    params:
+      agent: AgentID
+  requestMission:
+    params:
+      agent: AgentID
+  submitMap:
+    params:
+      agent: AgentID
+      map: OccupancyGrid
+  compareMap:
+    access: self
+    params:
+      map1: OccupancyGrid
+      map2: OccupancyGrid
+    results:
+      conflict: Int32
+views:
+  globalMap:
+    results:
+      globalMap: OccupancyGrid
+  getMission:
+    params:
+      agent: AgentID
+    results:
+      mission: Int32
